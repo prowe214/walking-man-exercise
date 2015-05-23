@@ -1,19 +1,20 @@
-var daMan = document.getElementById('gif');
-var interval;
-var winWidth = document.body.clientWidth
-currentPos = 0;
-daMan.style.left = currentPos + 'px';
+var daMan = document.getElementById('gif'),
+    direction = 200;
 
+function move() {
+  var currentPos = parseInt(daMan.style.left) || 0;
 
-(function moveDaMan() {
-  alert('yo');
-  interval = setInterval(cripWalk, 200);
-  while (winWidth < daMan.style.left) {
-    daMan.className = 'right';
+  if (currentPos > (parseInt(window.innerWidth) - daMan.width)) {
+    direction = -2;
+    daMan.classList.toggle('left');
   };
-})();
+  if (currentPos < 0) {
+    direction = 2;
+    daMan.classList.toggle('left');
+  };
 
-function cripWalk() {
-  currentPos += 10;
-  daMan.style.left = currentPos + 'px';
+  daMan.style.left = currentPos + direction + 'px';
+
+
 };
+setInterval(move, 10);
